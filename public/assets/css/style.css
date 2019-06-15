@@ -1,9 +1,6 @@
-li {
-  padding: 5px;
-  margin: 5px;
-  background: #faebd7;
+h1 {
+  color: blue;
 }
-
 .label {
   font-weight: bold;
 }
@@ -17,3 +14,4 @@ li {
 .form-group {
   margin-bottom: 5px;
 }
+
