@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+      <link rel="stylesheet" href="/public/assets/css/style.css" type="text/css" />
+ 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-    <title>MVC With Cats!</title>
+    <title>Donkey Notes</title>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/assets/js/cats.js"></script>
+  
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+              <img src="http://clipartmag.com/images/notepad-clipart-38.jpg" alt="Girl in a jacket" style="width:100px;height:200px;">
+            </div>
+          <div class="col-sm">
+              <img src="https://www.onthisday.com/images/photos/democratic-party-logo.jpg" alt="Girl in a jacket" style="width:100px;height:200px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+          <h1> Welcome to Donkey Notes</h1>
+        </div>
+
   </head>
   <body>
-    <h1>Cats!</h1>
 
-    <h2>Cats that are not sleepy!</h2>
+      <div class="container">
+          <div class="row">
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputusername1">Username</label>
+                      <input type="username" class="form-control" id="exampleInputusername1" aria-describedby="usernameHelp" placeholder="Enter username">
+                      <small id="usernameHelp" class="form-text text-muted"></small>
+                
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>                        </div>
+            <div class="col-6">
+               </div>
+            <div class="col">
+            </div>
+          </div>
+          
+         
+        
 
-    <ul id="notSleepyCats"></ul>
-
-    <h2>Cats that are sleepy!</h2>
-
-    <ul id="sleepyCats"></ul>
-
-    <h2>Add a Cat</h2>
-    <form class="create-form">
-      <div class="form-group">
-        <label for="ca">Cat Name:</label>
-        <input type="text" id="ca" name="name" />
-      </div>
-
-      <div class="form-group">
-        <label for="sleepy">Sleepy?</label><br />
-        <input type="radio" name="sleepy" value="1" checked /> Sleepy!<br />
-        <input type="radio" name="sleepy" value="0" /> Awake
-      </div>
-
-      <button type="submit">Add Cat</button>
     </form>
   </body>
 </html>
