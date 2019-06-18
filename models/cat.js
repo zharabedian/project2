@@ -4,7 +4,7 @@ var orm = require("../config/orm.js");
 var model = {
   all: function(cb) {
     // putting 2 tables in here because we will need a join
-    orm.all("candidates", "notes", function(res) {
+    orm.all("candidates", "notes", condition, function(res) {
       cb(res);
     });
   },
