@@ -1,3 +1,4 @@
+// Hi, Nick. 
 var express = require("express");
 
 var router = express.Router();
@@ -21,6 +22,7 @@ router.get("/", function(req, res) {
 //   });
 // });
 
+// Add a note
 router.post("/api/add/:id", function(req, res) {
   var condition = "id = " + req.params.id;
   
@@ -31,7 +33,7 @@ router.post("/api/add/:id", function(req, res) {
     // username would go here.  
     req.body.notes
   ], function(result) {
-    // Send back something
+    // Some part of the object
     res.json({  });
   });
 });
