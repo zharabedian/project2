@@ -12,7 +12,7 @@ router.get("/", function(req, res) {
 // Create all our routes and set up logic within those routes where required.
 router.get("/data", function(req, res) {
   cat.all(function(data) {
-    res.json({ cats: data });
+    res.json({ candidates: data });
   });
 });
 

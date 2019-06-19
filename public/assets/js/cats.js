@@ -1,4 +1,7 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
+
+
+
 $(function() {
   $.ajax("/data", {
     type: "GET"
@@ -6,9 +9,9 @@ $(function() {
     var sleepyElem = $("#sleepyCats");
     var nosleepyElem = $("#notSleepyCats");
 
-    var cats = data.cats;
+    var cats = data;
     var len = cats.length;
-
+console.log(data);
     for (var i = 0; i < len; i++) {
       var new_elem =
         "<li>" +
