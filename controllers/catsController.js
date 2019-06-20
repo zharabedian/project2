@@ -2,16 +2,17 @@ var express = require("express");
 
 var router = express.Router();
 
-// Import the model (cat.js) to use its database functions.
 var cat = require("../models/cat.js");
 
 router.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-// Create all our routes and set up logic within those routes where required.
-router.get("/data", function(req, res) {
-  cat.all(function(data) {
+// WE NEED TO ENSURE THAT ONCE THE USERNAME SUBMIT BUTTON IS CLICKED, THAT THE 
+// url REDIRECTS TO /DATA/USERNAME
+router.get("/data/:username", function(req, res) {
+  var condition = "username = '" + req.params.username + "'";
+  cat.all(condition, function(data) {
     res.json({ candidates: data });
   });
 });
