@@ -1,53 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <link rel="stylesheet" href="/public/assets/css/style.css" type="text/css" />
- 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta charset="UTF-8" />
-    <title>Donkey Notes</title>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="/assets/js/cats.js"></script>
-  
-    <div class="container">
-        <div class="row">
-          <div class="col-sm">
-              <img src="http://clipartmag.com/images/notepad-clipart-38.jpg" alt="Girl in a jacket" style="width:100px;height:200px;">
-            </div>
-          <div class="col-sm">
-              <img src="https://www.onthisday.com/images/photos/democratic-party-logo.jpg" alt="Girl in a jacket" style="width:100px;height:200px;">
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-          <h1> Welcome to Donkey Notes</h1>
-        </div>
-
-  </head>
-  <body>
-
-      <div class="container">
-          <div class="row">
-            <div class="col">
-                <form>
-                    <div class="form-group">
-                      <label for="exampleInputusername1">Username</label>
-                      <input type="username" class="form-control" id="exampleInputusername1" aria-describedby="usernameHelp" placeholder="Enter username">
-                      <small id="usernameHelp" class="form-text text-muted"></small>
-                
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>                        </div>
-            <div class="col-6">
-               </div>
-            <div class="col">
-            </div>
-          </div>
-          
-         
-        
-
+​
+<head>
+ <link rel="stylesheet" href="/public/assets/css/style.css" type="text/css" />
+​
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <meta charset="UTF-8" />
+ <title>Donkey Notes</title>
+ <script src="https://code.jquery.com/jquery.js"></script>
+ <script src="/assets/js/cats.js"></script>
+​
+ <div class="container">
+  <div class="row">
+   <div class="col-sm">
+    <img src="http://clipartmag.com/images/notepad-clipart-38.jpg" alt="Girl in a jacket"
+     style="width:100px;height:200px;">
+   </div>
+   <div class="col-sm">
+    <img src="https://www.onthisday.com/images/photos/democratic-party-logo.jpg" alt="Girl in a jacket"
+     style="width:100px;height:200px;">
+   </div>
+  </div>
+ </div>
+​
+ <div class="container">
+  <h1> Welcome to Donkey Notes</h1>
+ </div>
+​
+</head>
+​
+<body>
+​
+ <div class="container">
+  <div class="row">
+   <div class="col">
+    <form>
+     <div class="form-group">
+      <label for="exampleInputusername1">Username</label>
+      <input type="username" class="form-control" id="usernameInput" aria-describedby="usernameHelp"
+       placeholder="Enter username">
+      <small id="usernameHelp" class="form-text text-muted"></small>
+​
+     </div>
+     <button type="submit" id="usernameButton" class="btn btn-primary">Submit</button>
     </form>
-  </body>
+   </div>
+   <div class="col-6">
+   </div>
+   <div class="col">
+   </div>
+  </div>
+​
+<!-- This is where the data will be -->
+<table class="table" id="candidateTable">
+  <thead>
+   <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Age</th>
+    <th scope="col">State</th>
+    <th scope="col">Party</th>
+    <th scope="col">Notes</th>
+   </tr>
+  </thead>
+  <tbody id="candidateData">
+   <tr>
+    <td>test</td>
+    <td>test</td>
+    <td>test</td>
+    <td>test</td>
+    <td>blah blahblah blahblah blahblah</td>
+   </tr>
+   <tr>
+     <td>Name</td>
+     <td>Mark</td>
+     <td>Otto</td>
+     <td>@mdo</td>
+     <td>blah blahblah blahblah blahblah</td>
+   </tr>
+   <tr>
+     <td>Name</td>
+     <td>Mark</td>
+     <td>Otto</td>
+     <td>@mdo</td>
+     <td>blah blahblah blahblah blahblah</td>
+   </tr>
+  </tbody>
+ </table>
+  
+​
+</body>
+​
 </html>
+<script type="text/javascript">
+  $("#usernameButton").click(function(){
+    var usernameLocal = $("#usernameInput").val();
+    localStorage.setItem("username", usernameLocal);
+  });
+  </script>
