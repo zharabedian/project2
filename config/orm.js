@@ -38,7 +38,7 @@ function objToSql(ob) {
 // Object for all our SQL statement functions.
 var orm = {
   all: function(tableInput1, tableInput2, condition, cb) {
-    var queryString = "SELECT * FROM " + tableInput1 + " as A INNER JOIN " + tableInput2 +  " as B ON A.candidate_id = B.candidate_id";
+    var queryString = "SELECT * FROM " + tableInput1 + " as A LEFT JOIN " + tableInput2 +  " as B ON A.candidate_id = B.candidate_id";
     queryString += " WHERE ";
     queryString += condition;
     
