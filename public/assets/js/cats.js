@@ -1,37 +1,60 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
+
+// $(document).ready(function () {
+
 var username = localStorage.getItem("username");
 $(function () {
 
-if (username == "" || username == null) {
-  username = "dummy";
-}
+  if (username == "" || username == null) {
+    username = "dummy";
+  }
 
   $.ajax("/data/" + username, {
     type: "GET"
 
   }).then(function (data) {
 
-
     $("#candidateData").empty();
     for (var i = 0; i < data.candidates.length; i++) {
+
+
+      if (data.candidates[i].notes == null) {
+        data.candidates[i].notes = "";
+      }
+
       $("#candidateData").append('<tr> \n <td>' + data.candidates[i].name + '</td> \n <td>' + data.candidates[i].age + '</td> \n <td>' + data.candidates[i].state + '</td> \n <td>' + data.candidates[i].party + '</td> + <td>' + data.candidates[i].notes + '</td> \n </tr>');
       $("#candidateData").append('<button type="submit" class="btn btn-primary" data-thecandidateid="' + data.candidates[i].candidate_id + '">Make Note for:  ' + data.candidates[i].name + '</button>');
       $("#candidateData").append('<label for ="' + data.candidates[i].candidate_id + '">Enter Note here</label> \n <textarea class="form-control" id="' + data.candidates[i].candidate_id + '" rows ="3"></textarea>');
+      $("#candidateData").append('<button type="submit" class="btn btn-primary" data-id="deleteBtn" data-thenoteid="' + data.candidates[i].notes_id + '">Delete Note for:  ' + data.candidates[i].name + '</button>');
       // $("#candidateData").append(databaseNote + i);
       // $("#candidateData").append('<div data-notecandidate' + i + '=muffins">' + data.candidates[i].notes + '</div>');
     };
 
     $(document).on("click", ".btn", function () {
+
+      if ($(this).data("id") === "deleteBtn") {
+        console.log("this is the delete button");
+        var notes_id = $(this).data("thenoteid");
+        console.log(notes_id);
+
+        // Send the DELETE request.
+        $.ajax("/api/cats/" + notes_id, {
+          type: "DELETE"
+        }).then(function () {
+          
+          // Reload the page to get the updated list
+          location.reload();
+          
+        });
+      }
+
+else {
       console.log("I've been clicked");
       console.log("Candidate Id is " + $(this).data("thecandidateid"));
 
       console.log($("#" + $(this).data("thecandidateid")).val());
 
       var thecanid = $(this).data("thecandidateid");
-
-
-      // console.log(document.querySelectorAll('[data-notecandidate0][0].innerText'));
-
       var nodeObject = document.querySelectorAll('[data-notecandidate' + thecanid + ']');
       console.log(nodeObject);
 
@@ -41,9 +64,8 @@ if (username == "" || username == null) {
 
       var newCat = {
         name: $("#" + $(this).data("thecandidateid")).val(),
-        username: "test1"
-        // username: localStorage.getItem("username")
-        ///add username here
+
+
       };
       // $.ajax("/data", {
       $.ajax("/api/cats", {
@@ -67,7 +89,7 @@ if (username == "" || username == null) {
       //   localStorage.setItem("buttonArray", JSON.stringify(buttonArray));
 
       // }
-    });
+     } });
 
     // <label for="exampleFormControlTextarea1">Example textarea</label>
     // <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -186,16 +208,19 @@ if (username == "" || username == null) {
   });
 
 
-  $(document).on("click", ".delete-cat", function (event) {
-    var id = $(this).data("id");
+  // $(document).on("click", ".deleteBtn", function (event) {
+  //   console.log("delete button has been clicked");
+  //   var notes_id = $(this).data("thenoteID");
+  //   console.log(notes_id);
 
-    // Send the DELETE request.
-    $.ajax("/api/cats/" + id, {
-      type: "DELETE"
-    }).then(function () {
-      console.log("deleted cat", id);
-      // Reload the page to get the updated list
-      location.reload();
-    });
-  });
+  //   // Send the DELETE request.
+  //   $.ajax("/api/cats/" + id, {
+  //     type: "DELETE"
+  //   }).then(function () {
+  //     console.log("deleted cat", notes_id);
+  //     // Reload the page to get the updated list
+  //     location.reload();
+  //   });
+  // });
 });
+// });
