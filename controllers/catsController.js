@@ -20,23 +20,20 @@ router.get("/data/:username", function(req, res) {
 });
 
 router.post("/api/cats", function (req, res) {
-  var username = "username = 'test1'";
-  var candidate_id = "candidate_id = 1";
-  var notes = "notes = 'test notes'";
 
   cat.create([
     "candidate_id", "username", "notes"
   ], [
       // req.body.name, req.body.sleepy
-      candidate_id, username, notes
+      req.body.candidate_id, req.body.username, req.body.notes
     ], function (result) {
-      res.json({ candidates: data });
+      // res.json({ candidates: data });
     });
 });
 
 router.put("/api/cats/:id", function (req, res) {
   var condition = "notes_id = " + req.params.id;
-  var notes = "notes = 'test notes'";
+  var notes = req.body.notes;
 
   cat.update({
     notes: notes
@@ -45,7 +42,6 @@ router.put("/api/cats/:id", function (req, res) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
     } else {
-      res.json({ candidates: data });
       res.status(200).end();
     }
   });
