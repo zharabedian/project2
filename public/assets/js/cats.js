@@ -22,16 +22,21 @@ $(function () {
         data.candidates[i].notes = "";
       }
 
-      $("#candidateData").append('<tr> \n <td>' + data.candidates[i].name + '</td> \n <td>' + data.candidates[i].age + '</td> \n <td>' + data.candidates[i].state + '</td> \n <td>' + data.candidates[i].party + '</td> + <td>' + data.candidates[i].notes + '</td> \n </tr>');
-      $("#candidateData").append('<button type="submit" class="btn btn-primary" data-thecandidateid="' + data.candidates[i].candidate_id + '">Make Note for:  ' + data.candidates[i].name + '</button>');
+      if (data.candidates[i].funding_total == null) {
+        data.candidates[i].funding_total = "unavailable";
+      }
+
+      $("#candidateData").append('<tr> \n <td>' + data.candidates[i].name + '</td> \n <td>' + data.candidates[i].age + '</td> \n <td>' + data.candidates[i].state + '</td> \n <td>' + data.candidates[i].party + '</td> + <td>' + data.candidates[i].funding_total + '</td> + <td>' + data.candidates[i].notes + '</td> \n </tr>');
+      $("#candidateData").append('<button type="submit" class="btn btn-primary" data-id="addEditBtn" data-thenoteid="' + data.candidates[i].notes_id + '" data-thecandidateid="' + data.candidates[i].candidate_id + '">Make Note for:  ' + data.candidates[i].name + '</button>');
       $("#candidateData").append('<label for ="' + data.candidates[i].candidate_id + '">Enter Note here</label> \n <textarea class="form-control" id="' + data.candidates[i].candidate_id + '" rows ="3"></textarea>');
-      $("#candidateData").append('<button type="submit" class="btn btn-primary" data-id="deleteBtn" data-thenoteid="' + data.candidates[i].notes_id + '">Delete Note for:  ' + data.candidates[i].name + '</button>');
+      $("#candidateData").append('<button type="submit" class="btn btn-secondary" data-id="deleteBtn" data-thenoteid="' + data.candidates[i].notes_id + '">Delete Note for:  ' + data.candidates[i].name + '</button>');
       // $("#candidateData").append(databaseNote + i);
       // $("#candidateData").append('<div data-notecandidate' + i + '=muffins">' + data.candidates[i].notes + '</div>');
     };
 
     $(document).on("click", ".btn", function () {
 
+      // Delete button logic
       if ($(this).data("id") === "deleteBtn") {
         console.log("this is the delete button");
         var notes_id = $(this).data("thenoteid");
@@ -41,55 +46,110 @@ $(function () {
         $.ajax("/api/cats/" + notes_id, {
           type: "DELETE"
         }).then(function () {
-          
+
           // Reload the page to get the updated list
           location.reload();
-          
+
         });
       }
 
-else {
-      console.log("I've been clicked");
-      console.log("Candidate Id is " + $(this).data("thecandidateid"));
+      if ($(this).data("id") === "addEditBtn") {
 
-      console.log($("#" + $(this).data("thecandidateid")).val());
+        console.log("this is the add/edit button");
+        var candidate_id = $(this).data("thecandidateid");
+        console.log(candidate_id);
 
-      var thecanid = $(this).data("thecandidateid");
-      var nodeObject = document.querySelectorAll('[data-notecandidate' + thecanid + ']');
-      console.log(nodeObject);
+        //  Need to add If/else logic to see if note is blank or not.
+        // Add a note
+        // Add logic that requires username
+        var newCat = {
+          candidate_id: candidate_id,
+          username: localStorage.getItem("username"),
+          notes: "testing notes xxxxxxxxxxx"
+        };
 
-      console.log(nodeObject[0].innerText);
+        $.ajax("/api/cats", {
+          type: "POST",
+          data: newCat
+        }).then(function () {
 
-      $("#candidateData").append('<div data-notecandidate' + i + '=muffins">' + databaseNote + '</div>');
+          // Reload the page to get the updated list
+          location.reload();
 
-      var newCat = {
-        name: $("#" + $(this).data("thecandidateid")).val(),
+        });
 
 
-      };
-      // $.ajax("/data", {
-      $.ajax("/api/cats", {
-        type: "POST",
-        data: newCat
-      }).then(function () {
-        console.log(data.newCat);
-        console.log("created new cat");
-        // Reload the page to get the updated list
-        location.reload();
-      });
 
-      // if ($(this).data("id") === "buttonClearDiv") {
-      //   weatherQueryURLArray.splice(weatherQueryURLArray.indexOf($(this).data("weatherqueryurl")), 1);
-      //   queryURLArray.splice(queryURLArray.indexOf($(this).data("queryurl")), 1);
-      //   buttonArray.splice(buttonArray.indexOf($(this).data("buttonHtml")), 1);
-      //   $(this).closest('.DestroyMe').remove();
+         
+        // Update a note
+        var newCat = {
+          notes: "testing notes 2"
+        };
 
-      //   localStorage.setItem("weatherQueryURLArray", JSON.stringify(weatherQueryURLArray));
-      //   localStorage.setItem("queryURLArray", JSON.stringify(queryURLArray));
-      //   localStorage.setItem("buttonArray", JSON.stringify(buttonArray));
+        var notes_id = $(this).data("thenoteid");
 
-      // }
-     } });
+        $.ajax("/api/cats/" + notes_id, {
+          type: "PUT",
+          data: newCat
+        }).then(function () {
+
+          // Reload the page to get the updated list
+          location.reload();
+
+        });
+
+
+
+      }
+
+
+
+
+
+
+      else {
+        console.log("I've been clicked");
+        console.log("Candidate Id is " + $(this).data("thecandidateid"));
+
+        console.log($("#" + $(this).data("thecandidateid")).val());
+
+        var thecanid = $(this).data("thecandidateid");
+        var nodeObject = document.querySelectorAll('[data-notecandidate' + thecanid + ']');
+        console.log(nodeObject);
+
+        console.log(nodeObject[0].innerText);
+
+        $("#candidateData").append('<div data-notecandidate' + i + '=muffins">' + databaseNote + '</div>');
+
+        var newCat = {
+          name: $("#" + $(this).data("thecandidateid")).val(),
+
+
+        };
+
+        $.ajax("/api/cats", {
+          type: "POST",
+          data: newCat
+        }).then(function () {
+          console.log(data.newCat);
+          console.log("created new cat");
+          // Reload the page to get the updated list
+          location.reload();
+        });
+
+        // if ($(this).data("id") === "buttonClearDiv") {
+        //   weatherQueryURLArray.splice(weatherQueryURLArray.indexOf($(this).data("weatherqueryurl")), 1);
+        //   queryURLArray.splice(queryURLArray.indexOf($(this).data("queryurl")), 1);
+        //   buttonArray.splice(buttonArray.indexOf($(this).data("buttonHtml")), 1);
+        //   $(this).closest('.DestroyMe').remove();
+
+        //   localStorage.setItem("weatherQueryURLArray", JSON.stringify(weatherQueryURLArray));
+        //   localStorage.setItem("queryURLArray", JSON.stringify(queryURLArray));
+        //   localStorage.setItem("buttonArray", JSON.stringify(buttonArray));
+
+        // }
+      }
+    });
 
     // <label for="exampleFormControlTextarea1">Example textarea</label>
     // <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>

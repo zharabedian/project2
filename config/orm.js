@@ -38,9 +38,10 @@ function objToSql(ob) {
 // Object for all our SQL statement functions.
 var orm = {
   all: function(tableInput1, tableInput2, condition, cb) {
-    var queryString = "SELECT * FROM " + tableInput1 + " as A LEFT OUTER JOIN " + tableInput2 +  " as B ON A.candidate_id = B.candidate_id";
+    var queryString = "SELECT A.candidate_id, name, state, age, party, funding_total, notes_id, username, notes FROM " + tableInput1 + " as A LEFT OUTER JOIN " + tableInput2 +  " as B ON A.candidate_id = B.candidate_id";
     queryString += " AND ";
     queryString += condition;
+    queryString += "ORDER BY A.candidate_id;";
     
     connection.query(queryString, function(err, result) {
       if (err) {
