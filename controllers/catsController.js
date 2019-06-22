@@ -4,37 +4,22 @@ var router = express.Router();
 
 var cat = require("../models/cat.js");
 
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
-  console.log(localStorage.getItem("username"));
+
 });
 
 
-
-// Version that uses local storage for username
-// router.get("/data", function(req, res) {
-  
-//   var condition = "username = '" + localStorage.getItem("username") + "'";
-//   // console.log(condition);
-//   cat.all(condition, function(data) {
-//     res.json({ candidates: data });
-
-//   });
-// });
-
-
-// Version that uses URL with the username
 router.get("/data/:username", function(req, res) {
   var condition = "username = '" + req.params.username + "'";
-  // var condition = "username = '" + req.body. the username from local storage passed here
+  
   cat.all(condition, function(data) {
     res.json({ candidates: data });
 
-    console.log(data[0].notes);
   });
 });
 
-router.post("/api/cats", function(req, res) {
+router.post("/api/cats", function (req, res) {
   var username = "username = 'test1'";
   var candidate_id = "candidate_id = 1";
   var notes = "notes = 'test notes'";
@@ -42,20 +27,20 @@ router.post("/api/cats", function(req, res) {
   cat.create([
     "candidate_id", "username", "notes"
   ], [
-    // req.body.name, req.body.sleepy
-    candidate_id, username, notes
-  ], function(result) {
-    res.json({ candidates: data });
-  });
+      // req.body.name, req.body.sleepy
+      candidate_id, username, notes
+    ], function (result) {
+      res.json({ candidates: data });
+    });
 });
 
-router.put("/api/cats/:id", function(req, res) {
+router.put("/api/cats/:id", function (req, res) {
   var condition = "notes_id = " + req.params.id;
   var notes = "notes = 'test notes'";
 
   cat.update({
     notes: notes
-  }, condition, function(result) {
+  }, condition, function (result) {
     if (result.changedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
@@ -66,10 +51,10 @@ router.put("/api/cats/:id", function(req, res) {
   });
 });
 
-router.delete("/api/cats/:id", function(req, res) {
+router.delete("/api/cats/:id", function (req, res) {
   var condition = "notes_id = " + req.params.id;
 
-  cat.delete(condition, function(result) {
+  cat.delete(condition, function (result) {
     if (result.affectedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
