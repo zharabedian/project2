@@ -24,10 +24,9 @@ router.post("/api/cats", function (req, res) {
   cat.create([
     "candidate_id", "username", "notes"
   ], [
-      // req.body.name, req.body.sleepy
       req.body.candidate_id, req.body.username, req.body.notes
     ], function (result) {
-      // res.json({ candidates: data });
+      res.json({  });
     });
 });
 

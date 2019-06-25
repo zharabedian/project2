@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-​
-
 <head>
   <link rel="stylesheet" href="/public/assets/css/style.css" type="/text/css" />
   ​
@@ -44,9 +42,10 @@
             <input type="username" class="form-control" id="usernameInput" aria-describedby="usernameHelp"
               placeholder="Enter username">
             <small id="usernameHelp" class="form-text text-muted"></small>
+            <div>You are logged in as: <span id="usernameDisplay"></span></div>
             ​
           </div>
-          <button type="submit" id="usernameButton" class="btn btn-primary">Enter Username</button>
+          <button type="submit" data-id="usernameButton" class="btn btn-primary">Enter Username</button>
           <button type="submit" data-id="editModeBtn" class="btn btn-danger">Note Editting Mode</button>
 
         </form>
@@ -65,32 +64,10 @@
           <th scope="col">Age</th>
           <th scope="col">State</th>
           <th scope="col">Party</th>
-          <th scope="col">Funding</th>
           <th scope="col">Notes</th>
         </tr>
       </thead>
       <tbody id="candidateData">
-        <tr>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>blah blahblah blahblah blahblah</td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>blah blahblah blahblah blahblah</td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>blah blahblah blahblah blahblah</td>
-        </tr>
       </tbody>
     </table>
 
@@ -99,12 +76,3 @@
 ​
 
 </html>
-
-<script type="text/javascript">
-  $("#usernameButton").click(function () {
-
-    var usernameLocal = $("#usernameInput").val();
-    localStorage.setItem("username", usernameLocal);
-  });
-
-</script>
