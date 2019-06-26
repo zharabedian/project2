@@ -2,7 +2,7 @@ var express = require("express");
 
 var router = express.Router();
 
-var cat = require("../models/cat.js");
+var cat = require("../models/donkey.js");
 
 router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
