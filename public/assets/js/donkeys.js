@@ -3,7 +3,6 @@
 $(document).ready(function () {
 
   var username = localStorage.getItem("username");
-  var sorter = "";
 
 
   $(function () {
@@ -80,7 +79,7 @@ $(document).ready(function () {
         // If the delete button is clicked, call the Delete request
         if ($(this).data("id") === "deleteBtn") {
 
-          if (username == "dummy") {
+          if (username == "default user") {
             alert("Please enter an email address to proceed");
             return;
           }
@@ -96,7 +95,7 @@ $(document).ready(function () {
         // If the add/edit button is clicked, enter this function
         if ($(this).data("id") === "addEditBtn") {
 
-          if (username == "dummy") {
+          if (username == "default user") {
             alert("Please enter a username to proceed");
             return;
           }
