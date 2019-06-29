@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="/public/assets/css/style.css" type="/text/css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
   ​
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -11,28 +11,19 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="/assets/js/donkeys.js"></script>
   ​
-  <div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <img src="http://clipartmag.com/images/notepad-clipart-38.jpg" alt="Girl in a jacket"
-          style="width:100px;height:200px;">
-      </div>
-      <div class="col-sm">
-        <img src="https://www.onthisday.com/images/photos/democratic-party-logo.jpg" alt="Girl in a jacket"
-          style="width:100px;height:200px;">
-      </div>
-    </div>
-  </div>
-  ​
-  <div class="container">
-    <h1> Welcome to Donkey Notes</h1>
-  </div>
-  ​
 </head>
-​
 
-<body>
+  <div class="p-3 mb-2 bg-light text-dark" style="border: 9px inset #C70039;">
+    <div class="container">
+      <h1 style="color: #03437c"><strong>Welcome to Donkey Notes</strong></h1>
+      <p><i>Here is where we explain it briefly</i></p>
+      <img id= "demoDonkey" src="./assets/images/kisspng-clip-art-computer-icons-election-voting-video-democratic-free-other-icons-5baa92c0b45405.2432435615379053447386.png"
+      alt="Democratic Donkey" width="30%">
+    </div>​
+
+<body class="p-3 mb-2" style="background-color: #5091CF">
   ​
+
   <div class="container">
     <div class="row">
       <div class="col">
@@ -45,8 +36,8 @@
             <div>You are logged in as: <span id="usernameDisplay"></span></div>
             ​
           </div>
-          <button type="submit" data-id="usernameButton" class="btn btn-primary">Enter Username</button>
-          <button type="submit" data-id="editModeBtn" class="btn btn-danger">Note Editting Mode</button>
+          <button type="submit" data-id="usernameButton" class="btn btn-primary" style="background-color: #0853a4">Enter Username</button>
+          <button type="submit" data-id="editModeBtn" class="btn btn-danger" style="background-color: #e02424">Note Editting Mode</button>
 
         </form>
       </div>
@@ -58,18 +49,24 @@
     <table class="table" id="candidateTable">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Age</th>
-          <th scope="col">State</th>
-          <th scope="col">Party</th>
-          <th scope="col">Notes</th>
+          <th scope="col"><button id="sortingButton" type="submit" data-id="name"
+              class="btn btn-default"><strong>Name</strong></button></th>
+          <th scope="col"><button id="sortingButton" type="submit" data-id="age"
+              class="btn btn-default"><strong>Age</strong></button></th>
+          <th scope="col"><button id="sortingButton" type="submit" data-id="state"
+              class="btn btn-default"><strong>State</strong></button></th>
+          <th scope="col"><button id="sortingButton" type="submit" data-id="party"
+              class="btn btn-default"><strong>Party</strong></button></th>
+          <th scope="col"><button id="sortingButton" type="submit" data-id="notes"
+              class="btn btn-default"><strong>Notes</strong></button></th>
         </tr>
       </thead>
       <tbody id="candidateData">
       </tbody>
     </table>
 
-    ​
+    </span> ​
+  </div>
 </body>
 ​
 

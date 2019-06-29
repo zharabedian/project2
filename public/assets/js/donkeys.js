@@ -3,6 +3,7 @@
 $(document).ready(function () {
 
   var username = localStorage.getItem("username");
+  var sorter = "";
 
 
   $(function () {
@@ -14,6 +15,11 @@ $(document).ready(function () {
 
     // display username
     $("#usernameDisplay").html(username);
+
+    // // Used for sorting
+    // $(document).on("click", "#sortingButton", function () {
+    //   sorter = $(this).data("id");
+    // });
 
     $.ajax("/data/" + username, {
       type: "GET"
@@ -41,7 +47,7 @@ $(document).ready(function () {
           data.candidates[i].notes_id +
           '" data-thecandidateid="' +
           data.candidates[i].candidate_id +
-          '">Make Note for:  ' +
+          '">Add or Edit Note for  ' +
           data.candidates[i].name +
           '</button> <label for ="' +
           data.candidates[i].candidate_id +
@@ -50,7 +56,7 @@ $(document).ready(function () {
           '" rows ="3" >' + data.candidates[i].notes +
           '</textarea> <button type="submit" class="btn btn-secondary" data-id="deleteBtn" data-thenoteid="' +
           data.candidates[i].notes_id +
-          '">Delete Note for:  ' +
+          '">Delete Note for  ' +
           data.candidates[i].name +
           '</button></div>');
       };
@@ -58,6 +64,7 @@ $(document).ready(function () {
       $(".editMode").hide();
 
       $(document).on("click", ".btn", function () {
+
 
         if ($(this).data("id") === "usernameButton") {
           var usernameLocal = $("#usernameInput").val();
@@ -129,6 +136,9 @@ $(document).ready(function () {
             });
           };
         };
+
+
+
       });
     });
   });
